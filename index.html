@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boilerplate Code</title>
+    <style>
+        body{
+            font-family:Arial, Helvetica, sans-serif ;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #fff;
+        }
+
+        #root{
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0px 0px 16px;
+            overflow: hidden;
+            width: 300px;
+            text-align: center;
+        }
+        div{
+            margin: 15px;
+        }
+        h1,h2{
+            color: #333;
+        }
+
+        h1{
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        h2{
+            font-size: 18px;
+            color: #555;
+        }
+
+        button{
+            background-color: rgb(85, 136, 8);
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button:hover{
+            background-color: rgb(137, 153, 114);
+        }
+
+
+
+
+
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script src="https://www.unpkg.com/react@18.2.0/umd/react.development.js"></script>
+  <script src="https://www.unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    // Code goes her
+const root = document.getElementById("root");
+const reactRoot = ReactDOM.createRoot(root);
+
+const{useState} = React;
+
+    function RenderButtons({runs , setRuns}){
+        return(
+            <>
+            <button onClick={() => setRuns(runs+ 4)}>increase runs by 4</button>
+            <button onClick={() => setRuns(runs+ 8)}>increase runs by 8</button>
+            <button onClick={() => setRuns(runs+ 3)}>increase runs by 3</button>
+            </>
+        );
+    }
+
+
+
+const CricketScoreboard = () => {
+
+    const[runs , setRuns]=useState(0)
+     const[wickets , setWickets]=useState(0)
+
+    return(
+        <>
+        <div>
+            <h1> runs - {runs}</h1>
+            <h2>wickets - {wickets}</h2>
+        </div>
+
+        <div>
+            {wickets!=10 ? (
+            <RenderButtons runs={runs} setRuns={setRuns}/>
+            ) : (
+               <h1>the  final score is there {runs}</h1> 
+            )}
+        </div>
+
+        <div>
+            <button onClick = {() => wickets !=10 && setWickets(wickets+1) }>
+                update wickets
+            </button>
+
+        </div>
+            </>
+
+    );
+}
+
+const App = () =>{
+    return(
+    <>
+    <CricketScoreboard/>
+    </>
+
+    )
+}
+reactRoot.render(<App/>)
+
+  </script>
+</html>
